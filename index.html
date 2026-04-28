@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Amir Ghazizadeh — Senior Ph.D. student at UCF building efficient AI systems. Hardware accelerators, GPU kernels, and HW/SW co-design for sparse and irregular workloads. NeurIPS, MICRO, ISCA, DAC, ICCAD, ICCD.">
+    <meta name="author" content="Amir Ghazizadeh">
 
-    <title>Amir Ghazizadeh</title>
+    <title>Amir Ghazizadeh — Efficient AI Systems · HW/SW Co-Design · CUDA</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/unicons.css">
@@ -15,26 +15,24 @@
 
     <!-- MAIN STYLE -->
     <link rel="stylesheet" href="css/tooplate-style.css">
-    
-<!--
-
-https://codepen.io/sosuke/pen/Pjoqqp
-
-Tooplate 2115 Marvel
-
-https://www.tooplate.com/view/2115-marvel
-
--->
   </head>
   <body>
+
+    <!-- TOP SCROLL PROGRESS BAR -->
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+    <!-- CURSOR GLOW (desktop) -->
+    <div class="cursor-glow" aria-hidden="true"></div>
 
     <!-- MENU -->
     <nav class="navbar navbar-expand-sm navbar-light">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><i class='uil uil-user'></i> Amir Ghazizadeh</a>
+            <a class="navbar-brand" href="index.html">
+              <i class='uil uil-code'></i>
+              <span><span class="prompt">~/</span>amir.ghz</span>
+            </a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
@@ -43,24 +41,29 @@ https://www.tooplate.com/view/2115-marvel
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a href="#about" class="nav-link"><span data-hover="About">About</span></a>
-                    </li>
-                    <!--<li class="nav-item">
-                        <a href="#project" class="nav-link"><span data-hover="Projects">Projects</span></a>
-                    </li>-->
-                    <li class="nav-item">
-                        <a href="#resume" class="nav-link"><span data-hover="Resume">Resume</span></a>
+                        <a href="#about" class="nav-link"><span class="num">01.</span><span data-hover="about">about</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#contact" class="nav-link"><span data-hover="Contact">Contact</span></a>
+                        <a href="#project" class="nav-link"><span class="num">02.</span><span data-hover="projects">projects</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#publications" class="nav-link"><span class="num">03.</span><span data-hover="papers">papers</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#resume" class="nav-link"><span class="num">04.</span><span data-hover="resume">resume</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#skills" class="nav-link"><span class="num">05.</span><span data-hover="skills">skills</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link"><span class="num">06.</span><span data-hover="contact">contact</span></a>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav ml-lg-auto">
                     <div class="ml-lg-4">
-                      <div class="color-mode d-lg-flex justify-content-center align-items-center">
+                      <div class="color-mode d-lg-flex justify-content-center align-items-center" title="Toggle theme">
                         <i class="color-mode-icon"></i>
-                        
                       </div>
                     </div>
                 </ul>
@@ -70,317 +73,668 @@ https://www.tooplate.com/view/2115-marvel
 
     <!-- ABOUT -->
     <section class="about full-screen d-lg-flex justify-content-center align-items-center" id="about">
+        <!-- floating 3D shapes (decorative) -->
+        <div class="hero-shapes" aria-hidden="true">
+          <div class="shape shape-cube">
+            <div class="face front"></div>
+            <div class="face back"></div>
+            <div class="face right"></div>
+            <div class="face left"></div>
+            <div class="face top"></div>
+            <div class="face bottom"></div>
+          </div>
+          <div class="shape shape-hex">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+          </div>
+          <div class="shape shape-dots">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+              <line x1="50" y1="4"  x2="12" y2="30" stroke="rgba(100,255,218,.35)" stroke-width=".5"/>
+              <line x1="50" y1="4"  x2="88" y2="30" stroke="rgba(100,255,218,.35)" stroke-width=".5"/>
+              <line x1="12" y1="30" x2="22" y2="70" stroke="rgba(199,146,234,.35)" stroke-width=".5"/>
+              <line x1="88" y1="30" x2="78" y2="70" stroke="rgba(199,146,234,.35)" stroke-width=".5"/>
+              <line x1="22" y1="70" x2="50" y2="96" stroke="rgba(247,129,102,.35)" stroke-width=".5"/>
+              <line x1="78" y1="70" x2="50" y2="96" stroke="rgba(247,129,102,.35)" stroke-width=".5"/>
+              <line x1="22" y1="70" x2="78" y2="70" stroke="rgba(100,255,218,.25)" stroke-width=".5"/>
+              <line x1="12" y1="30" x2="88" y2="30" stroke="rgba(100,255,218,.25)" stroke-width=".5"/>
+            </svg>
+            <span class="d"></span>
+            <span class="d"></span>
+            <span class="d"></span>
+            <span class="d"></span>
+            <span class="d"></span>
+            <span class="d"></span>
+          </div>
+        </div>
+
         <div class="container">
-            <div class="row">
-                
-                <div class="col-lg-7 col-md-12 col-12 d-flex align-items-center">
-                    <div class="about-text">
-                        <small class="small-text">Welcome to <span class="mobile-block">my personal website!</span></small>
+            <div class="row align-items-center">
+
+                <div class="col-lg-7 col-md-12 col-12">
+                    <div class="about-text reveal">
+                        <small class="small-text">$ welcome — initializing portfolio.exe</small>
                         <h1 class="animated animated-text">
-                            <span class="mr-2">Hey there! I'm</span>
+                            <span class="mr-2">Hi, I'm Amir —</span>
                                 <div class="animated-info">
-                                    <span class="animated-item">Amir.</span>
-                                    <span class="animated-item">a Student.</span>
-                                    <span class="animated-item">a Learnaholic!</span>
+                                    <span class="animated-item">a Bit-Bothering Researcher.</span>
+                                    <span class="animated-item">an ML Accelerator Designer.</span>
+                                    <span class="animated-item">an Efficient ML Systems Designer.</span>
                                 </div>
                         </h1>
 
-                        <p style="text-align: justify;">I am a Ph.D. student at the University of Central Florida. My research focuses on the intersection of AI and computer architecture, with an emphasis on designing and optimizing systems for AI applications, including DNNs and GNNs. I enjoy exploring how AI workloads can be efficiently mapped to hardware, ensuring high performance and scalability.</p>
-                        
-                        <div class="custom-btn-group mt-4">
-                          <a href="https://github.com/amir-ghz" target="_blank" class="btn mr-lg-2 custom-btn"><i class='uil uil-code'></i>  Github</a>
-                          <a href="https://www.linkedin.com/in/amir-ghazizadeh-62a76a17a" class="btn custom-btn custom-btn-bg custom-btn-link"><i class='uil uil-user'></i>  Linkedin</a>
+                        <p class="tagline" style="text-align: justify;">
+                          Senior Ph.D. student in Computer Engineering at the
+                          <span class="hl">University of Central Florida</span>, working at the seam between
+                          <span class="hl-purple">computer architecture</span> and
+                          <span class="hl-orange">AI/ML systems</span>. I design hardware-software co-optimized accelerators for
+                          <span class="hl">GNNs, DNNs, and sparse workloads</span> — translating model-level insight into dataflow,
+                          tiling, and <span class="hl-orange">silicon-aware decisions</span>. Published at
+                          <span class="hl">NeurIPS</span>, and
+                          <span class="hl">MICRO</span>. I like the parts of the stack where the
+                          <span class="hl-purple">abstraction starts to leak</span>.
+                        </p>
+
+                        <div class="tag-row">
+                          <span class="tag"><span class="dot"></span>AI Accelerator Design</span>
+                          <span class="tag"><span class="dot"></span>GNN Acceleration</span>
+                          <span class="tag"><span class="dot"></span>Sparse Kernels</span>
+                          <span class="tag"><span class="dot"></span>HW/SW Co-Design</span>
+                          <span class="tag"><span class="dot"></span>CUDA / GPU Systems</span>
+                          <span class="tag"><span class="dot"></span>LLM × Graph</span>
+                        </div>
+
+                        <div class="custom-btn-group mt-2">
+                          <a href="https://github.com/amir-ghz" target="_blank" rel="noopener" class="btn custom-btn"><i class='uil uil-code'></i> github</a>
+                          <a href="https://scholar.google.com/citations?user=t_zFY7AAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener" class="btn custom-btn custom-btn-bg custom-btn-link"><i class='uil uil-graduation-hat'></i> scholar</a>
+                          <a href="https://www.linkedin.com/in/amir-ghazizadeh-62a76a17a" target="_blank" rel="noopener" class="btn custom-btn"><i class='uil uil-linkedin-alt'></i> linkedin</a>
+                          <a href="#contact" class="btn custom-btn btn-ghost custom-btn-link"><i class='uil uil-envelope-alt'></i> contact</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-5 col-md-12 col-12">
-                    <div class="about-image svg" style="text-align: center;">
-                        <img style="height: 40vh !important; filter: invert(67%) sepia(38%) saturate(1257%) hue-rotate(358deg) brightness(109%) contrast(109%);" src="images/undraw/artificial-intelligence-svgrepo-com.svg" class="img-fluid" alt="svg image">
+                <div class="col-lg-5 col-md-12 col-12 mt-4 mt-lg-0">
+                    <div class="terminal-card reveal">
+                      <div class="terminal-header">
+                        <div class="dots">
+                          <span class="dot r"></span>
+                          <span class="dot y"></span>
+                          <span class="dot g"></span>
+                        </div>
+                        <span class="title">amir@ucf:~ — zsh</span>
+                      </div>
+                      <div class="terminal-body">
+                        <div><span class="prompt">$</span> <span class="cmd">whoami</span></div>
+                        <div class="out">amir.ghazizadeh</div>
+                        <br>
+                        <div><span class="prompt">$</span> <span class="cmd">cat ~/about.json</span></div>
+                        <div class="out">{</div>
+                        <div class="out">&nbsp;&nbsp;<span class="key">"role"</span>: <span class="str">"Senior Ph.D. Student, CompE"</span>,</div>
+                        <div class="out">&nbsp;&nbsp;<span class="key">"school"</span>: <span class="str">"UCF"</span>,</div>
+                        <div class="out">&nbsp;&nbsp;<span class="key">"focus"</span>: [</div>
+                        <div class="out">&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"AI accelerators"</span>,</div>
+                        <div class="out">&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"sparse GPU kernels"</span>,</div>
+                        <div class="out">&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"HW/SW co-design"</span></div>
+                        <div class="out">&nbsp;&nbsp;],</div>
+                        <div class="out">&nbsp;&nbsp;<span class="key">"venues"</span>: [<span class="str">"NeurIPS"</span>, <span class="str">"MICRO"</span>, <span class="str">"ISCA"</span>, <span class="str">"DAC"</span>, <span class="str">"ICCAD"</span>, <span class="str">"ICCD"</span>],</div>
+                        <div class="out">&nbsp;&nbsp;<span class="key">"reviewer"</span>: [<span class="str">"NeurIPS"</span>, <span class="str">"ICML"</span>, <span class="str">"MLSys"</span>, <span class="str">"IEEE TC"</span>],</div>
+                        <div class="out">&nbsp;&nbsp;<span class="key">"coffee"</span>: <span class="str">"strong"</span></div>
+                        <div class="out">}</div>
+                        <br>
+                        <div><span class="prompt">$</span> <span class="cmd">echo $STATUS</span></div>
+                        <div class="out">// <span class="com">open to research collaborations &amp; FT roles, 2026</span></div>
+                        <br>
+                        <div><span class="prompt">$</span> <span class="cursor"></span></div>
+                      </div>
                     </div>
                 </div>
 
             </div>
         </div>
+    </section>
+
+    <!-- STATS STRIP -->
+    <section class="stats-strip-wrap" aria-label="Quick stats">
+      <div class="container">
+        <div class="stats-strip reveal-stagger">
+          <div class="stat-card tilt-card">
+            <span class="corner">// 01</span>
+            <div class="stat-num"><span data-count="8">0</span><span class="plus">+</span></div>
+            <div class="stat-label">Peer-reviewed papers</div>
+          </div>
+          <div class="stat-card tilt-card">
+            <span class="corner">// 02</span>
+            <div class="stat-num"><span data-count="6">0</span></div>
+            <div class="stat-label">Top-tier venues</div>
+          </div>
+          <div class="stat-card tilt-card">
+            <span class="corner">// 04</span>
+            <div class="stat-num"><span data-count="4">0</span></div>
+            <div class="stat-label">Years at UCF</div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- PROJECTS -->
-    <section class="project py-5" id="project">
+    <section class="project" id="project">
         <div class="container">
-                
-                <div class="row">
-                  <div class="col-lg-11 text-center mx-auto col-12">
+          <div class="row">
+            <div class="col-12 reveal">
+              <div class="section-eyebrow">// 02 &middot; selected work</div>
+              <h2 class="section-title"><span class="hash">#</span>Projects &amp; <span class="accent">academic experiments</span></h2>
+              <p class="section-subtitle">A mix of accelerator-design research, GPU-systems work, and embedded builds. Drop me a line if any of them sparks something.</p>
+            </div>
+          </div>
 
-                      <div class="col-lg-8 mx-auto">
-                        <h2>Projects and codes implemented as my academic experiences</h2>
-                        <h4>with Github codes provided below</h4>
-                      </div>
+          <div class="projects-grid reveal-stagger">
 
-                      <div class="owl-carousel owl-theme">
-                        <div class="item">
-                          <div class="project-info" style="display: flex; flex-direction: column;">
-                            <div>
-                              <img src="images/project/project-image01.png" class="img-fluid" alt="project image">
-                            </div>
-                            <div style="margin-top: -30px; margin-bottom: 30px;">
-                              <a href="https://github.com/amir-ghz/Capsule-Networks-Reliability" target="_blank" class="btn custom-btn custom-btn-bg custom-btn-link">Explore this project on Github</a>
-                            </div>
-
-                          </div>
-                        </div>
-
-                        <div class="item">
-                          <div class="project-info" style="display: flex; flex-direction: column;">
-                            <div>
-                              <img src="images/project/project-image02.png" class="img-fluid" alt="project image">
-                            </div>
-                            <div style="margin-top: -30px; margin-bottom: 30px;">
-                              <a href="https://github.com/amir-ghz/Configuring-SD-card-with-STM32-Microprocessor" target="_blank" class="btn custom-btn custom-btn-bg custom-btn-link">Explore this project on Github</a>
-                            </div>
-
-                          </div>
-                        </div>
-
-                        <div class="item">
-                          <div class="project-info" style="display: flex; flex-direction: column;">
-                            <div>
-                              <img src="images/project/project-image04.png" class="img-fluid" alt="project image">
-                            </div>
-                            <div style="margin-top: -30px; margin-bottom: 30px;">
-                              <a href="https://github.com/amir-ghz/Multicore-and-GPU-Programming" target="_blank" class="btn custom-btn custom-btn-bg custom-btn-link">Explore this project on Github</a>
-                            </div>
-
-                          </div>
-                        </div>
-
-                        <div class="item">
-                          <div class="project-info" style="display: flex; flex-direction: column;">
-                            <div>
-                              <img src="images/project/project-image05.png" class="img-fluid" alt="project image">
-                            </div>
-                            <div style="margin-top: -30px; margin-bottom: 30px;">
-                              <a href="https://github.com/amir-ghz/SPICE-Similations" target="_blank" class="btn custom-btn custom-btn-bg custom-btn-link">Explore this project on Github</a>
-                            </div>
-
-                          </div>
-                        </div>
-
-                        <div class="item">
-                          <div class="project-info" style="display: flex; flex-direction: column;">
-                            <div>
-                              <img src="images/project/project-image03.png" class="img-fluid" alt="project image">
-                            </div>
-                            <div style="margin-top: -30px; margin-bottom: 30px;">
-                              <a href="https://github.com/amir-ghz/MIPS-architecture-in-Proteus" target="_blank" class="btn custom-btn custom-btn-bg custom-btn-link">Explore this project on Github</a>
-                            </div>
-
-                          </div>
-                        </div>
-
-                      </div>
-
+            <!-- 1. GNN for Heterophilic Graphs -->
+            <article class="project-card tilt-card">
+              <div class="project-thumb">
+                <span class="badge-id">[01] research</span>
+                <img src="images/project/p-gnn-heterophilic.png" alt="" loading="lazy"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="placeholder" style="display:none;">
+                  <div style="text-align:center">
+                    <div class="icon"><i class='uil uil-circuit'></i></div>
+                    <div>// add image: p-gnn-heterophilic.png</div>
                   </div>
                 </div>
+              </div>
+              <div class="project-body">
+                <div class="project-meta">paper · NeurIPS '25 · GAMMA</div>
+                <h3 class="project-title">GNN Architecture Design for Heterophilic Graphs</h3>
+                <p class="project-desc">Gated multi-hop message passing rooted in an information-theoretic objective that maximizes relevant signal across hops. SOTA accuracy on 16 heterophilic benchmarks, 12&times; lower GPU memory, and 20&times; inference speedup via weight sharing and fixed-dim design.</p>
+                <div class="project-tags">
+                  <span class="ptag cyan">PyTorch</span>
+                  <span class="ptag purple">PyG</span>
+                  <span class="ptag orange">Heterophily</span>
+                </div>
+                <div class="project-actions">
+                  <a href="PDFs/GAMMA.pdf" target="_blank" rel="noopener" class="btn-link-mini"><i class='uil uil-file-alt'></i> paper</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- 2. HW/SW Co-Design for SpMM -->
+            <article class="project-card tilt-card">
+              <div class="project-thumb">
+                <span class="badge-id">[02] research</span>
+                <img src="images/project/p-spmm-codesign.png" alt="" loading="lazy"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="placeholder" style="display:none;">
+                  <div style="text-align:center">
+                    <div class="icon"><i class='uil uil-processor'></i></div>
+                    <div>// add image: p-spmm-codesign.png</div>
+                  </div>
+                </div>
+              </div>
+              <div class="project-body">
+                <div class="project-meta">paper · MICRO '25</div>
+                <h3 class="project-title">HW/SW Co-Design for Sparse Matrix Multiplication</h3>
+                <p class="project-desc">Reformulated SpMM as a graph-transformation problem: non-contiguous tiling, custom PE &micro;-architecture, and a Bidirectional Fiber Tree compression format. Cycle-accurate simulation (Ramulator + HBM): 3.2&times; lower off-chip traffic, 4.8&times; better energy efficiency, 4.3&times; average speedup over Sextans.</p>
+                <div class="project-tags">
+                  <span class="ptag cyan">SpMM</span>
+                  <span class="ptag purple">Cycle-Accurate</span>
+                  <span class="ptag yellow">Ramulator / HBM</span>
+                </div>
+                <div class="project-actions">
+                  <a href="PDFs/micro25-Aquila.pdf" target="_blank" rel="noopener" class="btn-link-mini"><i class='uil uil-file-alt'></i> paper</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- 3. Efficient DNN Quantization -->
+            <article class="project-card tilt-card">
+              <div class="project-thumb">
+                <span class="badge-id">[03] research</span>
+                <img src="images/project/p-quantization.png" alt="" loading="lazy"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="placeholder" style="display:none;">
+                  <div style="text-align:center">
+                    <div class="icon"><i class='uil uil-compress'></i></div>
+                    <div>// add image: p-quantization.png</div>
+                  </div>
+                </div>
+              </div>
+              <div class="project-body">
+                <div class="project-meta">M.Sc. · ICCKE '24</div>
+                <h3 class="project-title">Efficient Deep Learning Model Quantization</h3>
+                <p class="project-desc">Adaptive post-training quantization with mixed-precision allocation for Capsule Networks, driven by layer-wise vulnerability analysis. Power-of-Two scalers replace floating-point ops with hardware bitshifts — 8.67&times; weight compression, 4.56&times; activation reduction, 4&times; speedup, within 1% of full-precision accuracy.</p>
+                <div class="project-tags">
+                  <span class="ptag cyan">PyTorch</span>
+                  <span class="ptag purple">Mixed Precision</span>
+                  <span class="ptag orange">CapsNet</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://github.com/amir-ghz" target="_blank" rel="noopener" class="btn-link-mini"><i class='uil uil-code'></i> repo</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- 4. Capsule Network Reliability under SEU -->
+            <article class="project-card tilt-card">
+              <div class="project-thumb">
+                <span class="badge-id">[04] research</span>
+                <img src="images/project/project-image01.png" alt="" loading="lazy"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="placeholder" style="display:none;">
+                  <div style="text-align:center">
+                    <div class="icon"><i class='uil uil-shield-check'></i></div>
+                    <div>// add image: project-image01.png</div>
+                  </div>
+                </div>
+              </div>
+              <div class="project-body">
+                <div class="project-meta">M.Sc. work</div>
+                <h3 class="project-title">Reliability of Capsule Networks under SEU</h3>
+                <p class="project-desc">Fault-injection study tracing how Single-Event Upsets propagate through dynamic-routing layers, with mitigation strategies for soft-error tolerance — feeding directly into the layer-wise vulnerability ranking used in the quantization work.</p>
+                <div class="project-tags">
+                  <span class="ptag cyan">CapsNet</span>
+                  <span class="ptag orange">SEU / Fault-Injection</span>
+                  <span class="ptag purple">Reliability</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://github.com/amir-ghz/Capsule-Networks-Reliability" target="_blank" rel="noopener" class="btn-link-mini"><i class='uil uil-code'></i> repo</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- 5. Soccer Robot -->
+            <article class="project-card tilt-card">
+              <div class="project-thumb">
+                <span class="badge-id">[05] embedded</span>
+                <img src="images/project/p-soccer-robot.png" alt="" loading="lazy"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="placeholder" style="display:none;">
+                  <div style="text-align:center">
+                    <div class="icon"><i class='uil uil-cube'></i></div>
+                    <div>// add image: p-soccer-robot.png</div>
+                  </div>
+                </div>
+              </div>
+              <div class="project-body">
+                <div class="project-meta">undergrad · embedded</div>
+                <h3 class="project-title">Soccer Robot Development</h3>
+                <p class="project-desc">Embedded firmware in C/C++ for ARM-based microcontrollers, paired with OpenCV-based ball-detection pipelines on the host side. End-to-end build of the perception, control, and wireless command loop.</p>
+                <div class="project-tags">
+                  <span class="ptag cyan">C/C++</span>
+                  <span class="ptag purple">ARM MCU</span>
+                  <span class="ptag yellow">OpenCV</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://github.com/amir-ghz" target="_blank" rel="noopener" class="btn-link-mini"><i class='uil uil-code'></i> repo</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- 6. MIPS in Proteus -->
+            <article class="project-card tilt-card">
+              <div class="project-thumb">
+                <span class="badge-id">[06] arch</span>
+                <img src="images/project/project-image03.png" alt="" loading="lazy"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="placeholder" style="display:none;">
+                  <div style="text-align:center">
+                    <div class="icon"><i class='uil uil-window'></i></div>
+                    <div>// add image: project-image03.png</div>
+                  </div>
+                </div>
+              </div>
+              <div class="project-body">
+                <div class="project-meta">course · arch</div>
+                <h3 class="project-title">MIPS Processor in Proteus</h3>
+                <p class="project-desc">A complete MIPS ISA datapath built from gate-level primitives — fetch, decode, ALU, hazard handling, and memory — simulated and verified inside Proteus. Same material I later TA'd for UCF's Computer Organization course.</p>
+                <div class="project-tags">
+                  <span class="ptag cyan">MIPS ISA</span>
+                  <span class="ptag purple">Proteus</span>
+                  <span class="ptag orange">Datapath</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://github.com/amir-ghz/MIPS-architecture-in-Proteus" target="_blank" rel="noopener" class="btn-link-mini"><i class='uil uil-code'></i> repo</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- 7. Parallel Algorithms -->
+            <article class="project-card tilt-card">
+              <div class="project-thumb">
+                <span class="badge-id">[07] parallel</span>
+                <img src="images/project/project-image04.png" alt="" loading="lazy"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="placeholder" style="display:none;">
+                  <div style="text-align:center">
+                    <div class="icon"><i class='uil uil-server-network'></i></div>
+                    <div>// add image: project-image04.png</div>
+                  </div>
+                </div>
+              </div>
+              <div class="project-body">
+                <div class="project-meta">course · parallel</div>
+                <h3 class="project-title">Parallel Algorithms — Multicore &amp; GPU</h3>
+                <p class="project-desc">Course project benchmarking parallel primitives across CPU thread pools and CUDA kernels — communication, contention, warp coordination, and the gap between Amdahl and reality.</p>
+                <div class="project-tags">
+                  <span class="ptag cyan">CUDA</span>
+                  <span class="ptag purple">OpenMP</span>
+                  <span class="ptag yellow">Benchmarks</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://github.com/amir-ghz/Multicore-and-GPU-Programming" target="_blank" rel="noopener" class="btn-link-mini"><i class='uil uil-code'></i> repo</a>
+                </div>
+              </div>
+            </article>
+
+          </div>
         </div>
     </section>
-    
 
-<!-- SELECTED PUBLICATIONS -->
-<section class="publications py-5" id="publications">
-  <div class="container">
-      <div class="row">
-          <div class="col-lg-12 col-12 text-center">
-              <h2 class="mb-4">Selected Publications</h2>
+
+    <!-- SELECTED PUBLICATIONS -->
+    <section class="publications" id="publications">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 reveal">
+            <div class="section-eyebrow">// 03 &middot; peer-reviewed</div>
+            <h2 class="section-title"><span class="hash">#</span>Selected <span class="accent">publications</span></h2>
+            <p class="section-subtitle">A condensed log of papers — full list and citations on
+              <a href="https://scholar.google.com/citations?user=t_zFY7AAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">Google Scholar</a>.
+            </p>
           </div>
-      </div>
-      <div class="row">
-          <div class="col-lg-8 mx-auto col-12">
-              <ul class="list-group">
-                  <li class="list-group-item">
-                      <em>"GAMMA: Gated Multi-hop Message Passing for Homophily-Agnostic Node Representation in GNNs"</em>
-                      <br><small>Neurips, 2025</small>
-                      <br>(Amir Ghazizadeh, Rickard Ewetz, Hao Zheng)
-                      <br><small><a href="PDFs/GAMMA.pdf" target="_blank" class="badge badge-danger" style="text-decoration: none;">PDF</a></small>
-                  </li>
-                  <li class="list-group-item">
-                      <em>"Rethinking Tiling and Dataflow for SpMM Acceleration: A Graph Transformation Framework"</em>
-                      <br><small>MICRO, 2025</small>
-                      <br>(Amir Ghazizadeh, Lingxiang Lin, Shilin Tian, Fangzhou Ye, Fan Yao, Hao Zheng)
-                      <br><small><a href="PDFs/micro25-Aquila.pdf" target="_blank" class="badge badge-danger" style="text-decoration: none;">PDF</a></small>
-                  </li>
-                  <li class="list-group-item">
-                      <em>"EGMA: Enhancing Data Reuse and Workload Balancing in Message Passing GNN Acceleration via Gram Matrix Optimization"</em> 
-                      <br><small>DAC, 2024</small> 
-                      <br>(Fangzhou Ye, Lingxiang Yin, Amir Ghazizadeh, Hao Zheng)
-                  </li>
-                  <li class="list-group-item">
-                      <em>"Polyform: A Versatile Architecture for Multi-DNN Execution via Spatial and Temporal Acceleration"</em> 
-                      <br><small>ICCD, 2023</small> 
-                      <br>(Lingxiang Lin, Amir Ghazizadeh, Shilin Tian, Ahmed Louri, Hao Zheng)
-                  </li>
-                  <li class="list-group-item">
-                      <em>"Aries: Accelerating Distributed Training in Chiplet-Based Systems via Flexible Interconnects"</em> 
-                      <br><small>ICCAD, 2023</small> 
-                      <br>(Lingxiang Lin, Amir Ghazizadeh, Ahmed Louri, Hao Zheng)
-                  </li>
-                  <li class="list-group-item">
-                      <em>"Multi-Valued Logic Arbiter PUF Designs Based on CNTFETs"</em> 
-                      <br><small>Computers and Electrical Engineering 102, 2022</small> 
-                      <br>(Hossein Momeni, Amir Ghazizadeh, Fazel Sharifi)
-                  </li>
-              </ul>
+        </div>
+
+        <div class="pubs-card reveal">
+          <div class="terminal-header">
+            <div class="dots">
+              <span class="dot r"></span>
+              <span class="dot y"></span>
+              <span class="dot g"></span>
+            </div>
+            <span class="title">~/publications &mdash; cat *.bib</span>
           </div>
+          <div class="pub-list">
+
+            <div class="pub-item">
+              <div class="pub-venue">ISCA '26</div>
+              <div class="pub-content">
+                <h4 class="pub-title">TensorPrism: Rethinking Sparse High-order Tensor Acceleration via Co-occurrence Graph</h4>
+                <div class="pub-authors">F. Ye, S. Tian, <span class="me">A. Ghazizadeh</span>, F. Yao, H. Zheng</div>
+              </div>
+            </div>
+
+            <div class="pub-item">
+              <div class="pub-venue">NeurIPS '25</div>
+              <div class="pub-content">
+                <h4 class="pub-title">GAMMA: Gated Multi-hop Message Passing for Homophily-Agnostic Node Representation in GNNs</h4>
+                <div class="pub-authors"><span class="me">A. Ghazizadeh</span>, R. Ewetz, H. Zheng</div>
+                <div class="pub-actions">
+                  <a href="PDFs/GAMMA.pdf" target="_blank" rel="noopener" class="pub-pdf">PDF</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="pub-item">
+              <div class="pub-venue">MICRO '25</div>
+              <div class="pub-content">
+                <h4 class="pub-title">Rethinking Tiling and Dataflow for SpMM Acceleration: A Graph Transformation Framework</h4>
+                <div class="pub-authors"><span class="me">A. Ghazizadeh</span>, L. Lin, S. Tian, F. Ye, H. Zheng</div>
+                <div class="pub-actions">
+                  <a href="PDFs/micro25-Aquila.pdf" target="_blank" rel="noopener" class="pub-pdf">PDF</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="pub-item">
+              <div class="pub-venue">ICCKE '24</div>
+              <div class="pub-content">
+                <h4 class="pub-title">Towards Efficient Capsule Networks Through Approximate Squash Function and Layer-Wise Quantization</h4>
+                <div class="pub-authors">M. Raji, K. Soroush, <span class="me">A. Ghazizadeh</span></div>
+              </div>
+            </div>
+
+            <div class="pub-item">
+              <div class="pub-venue">DAC '24</div>
+              <div class="pub-content">
+                <h4 class="pub-title">EGMA: Enhancing Data Reuse and Workload Balancing in Message Passing GNN Acceleration via Gram Matrix Optimization</h4>
+                <div class="pub-authors">F. Ye, L. Yin, <span class="me">A. Ghazizadeh</span>, H. Zheng</div>
+              </div>
+            </div>
+
+            <div class="pub-item">
+              <div class="pub-venue">ICCD '23</div>
+              <div class="pub-content">
+                <h4 class="pub-title">Polyform: A Versatile Architecture for Multi-DNN Execution via Spatial and Temporal Acceleration</h4>
+                <div class="pub-authors">L. Yin, <span class="me">A. Ghazizadeh</span>, S. Tian, H. Zheng</div>
+              </div>
+            </div>
+
+            <div class="pub-item">
+              <div class="pub-venue">ICCAD '23</div>
+              <div class="pub-content">
+                <h4 class="pub-title">Aries: Accelerating Distributed Training in Chiplet-Based Systems via Flexible Interconnects</h4>
+                <div class="pub-authors">L. Yin, <span class="me">A. Ghazizadeh</span>, A. Louri, H. Zheng</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
-  </div>
-</section>
+    </section>
 
 
-
-
-
-    <!-- FEATURES -->
-    <section class="resume py-5 d-lg-flex justify-content-center align-items-center" id="resume">
+    <!-- RESUME / TIMELINE -->
+    <section class="resume" id="resume">
         <div class="container">
             <div class="row">
+              <div class="col-12 reveal">
+                <div class="section-eyebrow">// 04 &middot; the long log</div>
+                <h2 class="section-title"><span class="hash">#</span>Experience &amp; <span class="accent">education</span></h2>
+                <p class="section-subtitle">A reverse-chronological dump of where I've been and what I worked on.</p>
+              </div>
+            </div>
 
-                <div class="col-lg-6 col-12">
-                  <h2 class="mb-4">Experiences</h2>
+            <div class="row mt-2">
 
-                    <div class="timeline">
-                        <div class="timeline-wrapper">
-                          <div class="timeline-yr">
-                              <span>2024</span>
-                          </div>
-                          <div class="timeline-info">
-                              <h3><span>Teacher Assistant</span></h3>
-                              <h3><small>University of Central Florida</small></h3>
-                              <p style="text-align: justify;">Delivered lectures, focusing on MIPS ISA and hardware design to deepen student engagement and learning</p>
-                          </div>
-                        </div>
-
-                        <div class="timeline-wrapper">
-                             <div class="timeline-yr">
-                                  <span>2021</span>
-                             </div>
-                             <div class="timeline-info">
-                                  <h3><span>Visiting Researcher</span></h3>
-                                  <h3><small>Kerman Graduate University of Technology, Kerman, Iran</small></h3>
-                                  <p style="text-align: justify;">Experimenting Arbiter PUF (physical unclonable function) based on Carbon nanotube field-effect transistor with MVL (multiple valued logic) design</p>
-                             </div>
-                        </div>
-
-                        <div class="timeline-wrapper">
-                            <div class="timeline-yr">
-                                <span>2019</span>
-                            </div>
-                            <div class="timeline-info">
-                                <h3><span>Microprocessor Lab</h3>
-                                <h3><small>Course Project</small></h3>
-                                <p>Configuring SD Card Reader with STM32 Family Microcontrollers and studied deployment of Speech
-                                  Recognition system on STM32 Family Microcontrollers using TensorFlow Lite</p>
-                            </div>
-                        </div>
-                        
-                        <div class="timeline-wrapper">
-                            <div class="timeline-yr">
-                                <span>2019</span>
-                            </div>
-                            <div class="timeline-info">
-                                <h3><span>Design & development of Soccer Robot</h3>
-                                <p>Developed embedded software using C/C++ for ARM-based microcontrollers, Implemented transmission mechanism between the computer device and robot microcontroller wirelessly, Developed image processing algorithms for ball detection using OpenCV Library
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-12">
-                  <h2 class="mb-4 mobile-mt-2">Educations</h2>
+                <div class="col-lg-6 col-12 reveal">
+                  <h2><span class="hash">&gt;</span> Experience</h2>
 
                     <div class="timeline">
 
                         <div class="timeline-wrapper">
-                          <div class="timeline-yr">
-                              <span>2022</span>
-                          </div>
+                          <div class="timeline-yr"><span>'25</span></div>
                           <div class="timeline-info">
-                          <h3><span>PHD</span><small>IN COMPUTER ENGINEERING</small></h3>
-                          <p>University of Central Florida, Orlando, Florida</p>
+                              <h3>GNN Architecture for Heterophilic Graphs <small>UCF · RA</small></h3>
+                              <p>Information-theoretic gated message passing — SOTA accuracy on 16 heterophilic benchmarks, 12&times; lower GPU memory, 20&times; inference speedup. NeurIPS '25 (GAMMA).</p>
+                          </div>
+                        </div>
+
+                        <div class="timeline-wrapper">
+                          <div class="timeline-yr"><span>'24</span></div>
+                          <div class="timeline-info">
+                              <h3>HW/SW Co-Design for SpMM <small>UCF · RA</small></h3>
+                              <p>Graph-transformation framework, custom PE &micro;-arch, and a Bidirectional Fiber Tree compression format. 3.2&times; off-chip reduction, 4.8&times; energy gains, 4.3&times; speedup vs. Sextans. MICRO '25.</p>
+                          </div>
+                        </div>
+
+                        <div class="timeline-wrapper">
+                          <div class="timeline-yr"><span>'24</span></div>
+                          <div class="timeline-info">
+                              <h3>Teaching Assistant <small>UCF · Computer Org.</small></h3>
+                              <p>Delivered lectures on the MIPS ISA and processor hardware design — datapath, control, hazards — with concept-driven exercises to build student debugging intuition.</p>
+                          </div>
+                        </div>
+
+                        <div class="timeline-wrapper">
+                          <div class="timeline-yr"><span>'21–'22</span></div>
+                          <div class="timeline-info">
+                              <h3>MVL Arbiter PUF for HW Auth <small>KGUT · Visiting Researcher</small></h3>
+                              <p>Designed Arbiter PUFs in 32&nbsp;nm and 14&nbsp;nm CNTFET libraries with multi-valued logic, simulated in HSPICE. 99.56% (ternary) and 99.15% (quaternary) reliability across temperature and supply variations, deviation under 2%.</p>
+                          </div>
+                        </div>
+
+                        <div class="timeline-wrapper">
+                          <div class="timeline-yr"><span>'21–'22</span></div>
+                          <div class="timeline-info">
+                              <h3>Efficient DL Model Quantization <small>Shiraz Univ. · RA</small></h3>
+                              <p>Adaptive post-training quantization with layer-wise vulnerability analysis and Power-of-Two scalers (bitshift-friendly). 8.67&times; weight compression, 4.56&times; activation reduction, accuracy within 1% of FP baseline.</p>
+                          </div>
+                        </div>
+
+                        <div class="timeline-wrapper">
+                          <div class="timeline-yr"><span>'14–'20</span></div>
+                          <div class="timeline-info">
+                              <h3>Soccer Robot <small>Shahid Bahonar Univ.</small></h3>
+                              <p>Embedded software in C/C++ for ARM microcontrollers; OpenCV-based ball-detection pipelines on the host side. End-to-end perception, control, and wireless command loop.</p>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-12 reveal">
+                  <h2 class="mobile-mt-2"><span class="hash">&gt;</span> Education</h2>
+
+                    <div class="timeline">
+
+                        <div class="timeline-wrapper">
+                          <div class="timeline-yr"><span>'22→</span></div>
+                          <div class="timeline-info">
+                            <h3>Ph.D. <small>Computer Engineering</small></h3>
+                            <p>University of Central Florida — Orlando, FL. Research: efficient AI systems, hardware accelerators, and GPU kernels for sparse and irregular workloads.</p>
                           </div>
                         </div>
 
 
                         <div class="timeline-wrapper">
-                             <div class="timeline-yr">
-                                  <span>2020</span>
-                             </div>
+                             <div class="timeline-yr"><span>'20–'22</span></div>
                              <div class="timeline-info">
-                              <h3><span>M.SC .</span><small>IN COMPUTER ENGINEERING</small></h3>
-                              <p>Shiraz University, Shiraz, Iran</p>
+                              <h3>M.Sc. <small>Computer Engineering</small></h3>
+                              <p>Shiraz University — Shiraz, Iran. Ranked <strong>1st</strong> in M.Sc. studies. Thesis on capsule-network reliability under single-event upsets and quantization.</p>
                              </div>
                         </div>
 
                         <div class="timeline-wrapper">
-                            <div class="timeline-yr">
-                                <span>2014</span>
-                            </div>
+                            <div class="timeline-yr"><span>'14–'20</span></div>
                             <div class="timeline-info">
-                                <h3><span>B.SC .</span><small>IN COMPUTER ENGINEERING</small></h3>
-                                <p>Shahid Bahonar University, Kerman, Iran</p>
+                                <h3>B.Sc. <small>Computer Engineering</small></h3>
+                                <p>Shahid Bahonar University — Kerman, Iran. Foundation in digital design, architecture, and embedded systems.</p>
                             </div>
                         </div>
 
                     </div>
+
+                    <h2 class="mt-5"><span class="hash">&gt;</span> Service</h2>
+                    <p class="service-text">Reviewer — <span class="srv">NeurIPS</span>, <span class="srv">ICML</span>, <span class="srv">MLSys</span>, <span class="srv">IEEE TC</span></p>
                 </div>
-                
+
             </div>
         </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="skills" id="skills">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 reveal">
+            <div class="section-eyebrow">// 05 &middot; the toolbox</div>
+            <h2 class="section-title"><span class="hash">#</span>Technical <span class="accent">skills</span></h2>
+            <p class="section-subtitle">Things I reach for daily. Bold = primary, the rest are supporting cast.</p>
+          </div>
+        </div>
+
+        <div class="skills-grid reveal-stagger">
+          <div class="skill-card tilt-card">
+            <div class="skill-head">
+              <i class='uil uil-code'></i>
+              <h3>Programming</h3>
+            </div>
+            <div class="skill-body">
+              <span class="ptag cyan">Python</span>
+              <span class="ptag cyan">C / C++</span>
+              <span class="ptag cyan">CUDA</span>
+              <span class="ptag purple">JavaScript</span>
+            </div>
+          </div>
+          <div class="skill-card tilt-card">
+            <div class="skill-head">
+              <i class='uil uil-atom'></i>
+              <h3>ML &amp; Systems</h3>
+            </div>
+            <div class="skill-body">
+              <span class="ptag cyan">PyTorch</span>
+              <span class="ptag cyan">PyG</span>
+              <span class="ptag purple">DGL</span>
+              <span class="ptag purple">TensorFlow</span>
+              <span class="ptag yellow">TF Lite</span>
+              <span class="ptag orange">NumPy</span>
+              <span class="ptag orange">SciPy</span>
+              <span class="ptag orange">scikit-learn</span>
+            </div>
+          </div>
+          <div class="skill-card tilt-card">
+            <div class="skill-head">
+              <i class='uil uil-processor'></i>
+              <h3>Architecture &amp; HW</h3>
+            </div>
+            <div class="skill-body">
+              <span class="ptag cyan">Cycle-Accurate Sim</span>
+              <span class="ptag cyan">Ramulator / HBM</span>
+              <span class="ptag purple">RTL / Datapath</span>
+              <span class="ptag purple">HSPICE</span>
+              <span class="ptag orange">CNTFET libs</span>
+              <span class="ptag yellow">MIPS ISA</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- CONTACT -->
-    <section class="contact py-5" id="contact">
+    <section class="contact" id="contact">
       <div class="container">
         <div class="row">
-          
-          <div class="col-lg-5 mr-lg-5 col-12" style="display: flex; height: 200px;">
+          <div class="col-12 reveal">
+            <div class="section-eyebrow">// 06 &middot; let's chat</div>
+            <h2 class="section-title"><span class="hash">#</span>Get in <span class="accent">touch</span></h2>
+            <p class="section-subtitle">Happy to talk research, AI accelerators, GPU systems — or just nerdy side projects.</p>
+          </div>
+        </div>
+        <div class="row">
 
-
-            <div class="contact-info d-flex justify-content-between align-items-center py-4 px-lg-5">
-                <div class="contact-info-item">
-                  <h3 class="mb-3 text-white">Contact:</h3>
-                  <p><a href="mailto:amir.g@ucf.edu">amir.g@ucf.edu</a></p>
-                  <p><a href="mailto:ghazizade@cse.shirazu.ac.ir">amir.ghz1995@gmail.com</a></p>
-                </div>
-
-                <ul class="social-links">
-                     <li><a href="#" class="uil uil-user-check" data-toggle="tooltip" data-placement="left" title="Dribbble"></a></li>
-                     <li><a href="#" class="uil uil-mailbox" data-toggle="tooltip" data-placement="left" title="E-mail"></a></li>
-                     <li><a href="#" class="uil uil-mailbox" data-toggle="tooltip" data-placement="left" title="E-mail"></a></li>
-                </ul>
+          <div class="col-lg-5 mr-lg-5 col-12 reveal">
+            <div class="contact-info">
+              <h3>// contact</h3>
+              <p><i class='uil uil-envelope-alt'></i> <a href="mailto:amir.g@ucf.edu">amir.g@ucf.edu</a></p>
+              <p><i class='uil uil-phone'></i> <a href="tel:"></a></p>
+              <p><i class='uil uil-globe'></i> <a href="https://amir-ghz.github.io" target="_blank" rel="noopener">amir-ghz.github.io</a></p>
+              <ul class="social-links mt-3">
+                <li><a href="https://github.com/amir-ghz" target="_blank" rel="noopener" class="uil uil-code" data-toggle="tooltip" data-placement="top" title="GitHub"></a></li>
+                <li><a href="https://scholar.google.com/citations?user=t_zFY7AAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener" class="uil uil-graduation-hat" data-toggle="tooltip" data-placement="top" title="Google Scholar"></a></li>
+                <li><a href="https://www.linkedin.com/in/amir-ghazizadeh-62a76a17a" target="_blank" rel="noopener" class="uil uil-linkedin-alt" data-toggle="tooltip" data-placement="top" title="LinkedIn"></a></li>
+                <li><a href="mailto:amir.g@ucf.edu" class="uil uil-envelope-alt" data-toggle="tooltip" data-placement="top" title="Email"></a></li>
+              </ul>
             </div>
           </div>
 
-          <div class="col-lg-6 col-12">
+          <div class="col-lg-6 col-12 reveal">
             <div class="contact-form">
-              <h2 class="mb-4">How can I help?</h2>
+              <h2>// how can I help?</h2>
 
               <form action="https://formspree.io/f/xeqvbdno" method="post">
                 <div class="row">
                   <div class="col-lg-6 col-12">
-                    <input type="text" class="form-control" name="name" placeholder="Your Name" id="name">
+                    <input type="text" class="form-control" name="name" placeholder="your name" id="name">
                   </div>
 
                   <div class="col-lg-6 col-12">
-                    <input type="email" class="form-control" name="email" placeholder="Email" id="email">
+                    <input type="email" class="form-control" name="email" placeholder="email" id="email">
                   </div>
 
                   <div class="col-12">
-                    <textarea name="message" rows="6" class="form-control" id="message" placeholder="Message"></textarea>
+                    <textarea name="message" rows="6" class="form-control" id="message" placeholder="message..."></textarea>
                   </div>
 
                   <div class="ml-lg-auto col-lg-5 col-12">
-                    <input type="submit" class="form-control submit-btn" value="Send Button">
+                    <input type="submit" class="form-control submit-btn" value="send →">
                   </div>
                 </div>
               </form>
@@ -392,15 +746,13 @@ https://www.tooplate.com/view/2115-marvel
     </section>
 
     <!-- FOOTER -->
-     <footer class="footer py-5">
+     <footer class="footer">
           <div class="container">
                <div class="row">
-
-                    <div class="col-lg-12 col-12">                                
-                        <p class="copyright-text text-center">Copyright &copy; 2021 Amir Ghazizadeh . All rights reserved</p>
-                        <p class="copyright-text text-center">Designed by <a rel="nofollow" href="https://www.facebook.com/tooplate">Tooplate</a></p>
+                    <div class="col-12">
+                        <p class="copyright-text"><span class="accent">$</span> echo "&copy; 2026 Amir Ghazizadeh — built with caffeine &amp; curiosity"</p>
+                        <p class="copyright-text">hand-crafted HTML/CSS &middot; hosted on <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a></p>
                     </div>
-                    
                </div>
           </div>
      </footer>
