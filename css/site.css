@@ -630,10 +630,10 @@ img { max-width: 100%; height: auto; display: block; }
   margin: 0;
 }
 
+/* the preceding .entry already draws the divider — no second rule here */
 .service {
-  margin-top: 34px;
-  padding-top: 22px;
-  border-top: 1px solid var(--line);
+  margin-top: 26px;
+  padding-top: 0;
 }
 .service p { font-size: 15px; color: var(--paper-lo); margin: 0; }
 .service .v { color: var(--paper); font-family: var(--mono); font-size: 13.5px; }
