@@ -100,7 +100,7 @@
 
         <p class="hero-aside">
           I&rsquo;m a bit-bothering researcher &mdash; &ldquo;that&rsquo;s just the bottleneck&rdquo;
-          has never felt like the end of the answer.
+          has never felt like the end of the answer!
         </p>
 
         <div class="btn-row">
@@ -173,12 +173,12 @@
 
 
     <article class="work reveal">
-      <div>
-        <span class="work-venue">NeurIPS 2025</span>
-        <span class="work-when">Spring 2025</span>
+      <div class="work-thumb">
+        <img src="images/project/p-gnn-heterophilic.jpg" alt="Diagram of the GAMMA pipeline: an input graph feeds a gated multi-hop stage that maximises relevant signal, producing a compact graph representation." width="1400" height="870" loading="lazy" decoding="async">
       </div>
-      <div>
-        <h3>GAMMA — gated message passing for heterophilic graphs</h3>
+      <div class="work-body">
+        <p class="work-meta"><span class="work-venue">NeurIPS 2025</span><span class="work-when">Spring 2025</span></p>
+        <h3>GAMMA &mdash; gated message passing for heterophilic graphs</h3>
         <p>Gated multi-hop message passing driven by an information-theoretic objective that maximises relevant signal across aggregation hops. State-of-the-art accuracy on heterophilic benchmarks, with weight sharing and a fixed-dimensionality design that make the model dramatically cheaper to run.</p>
         <ul class="metrics">
           <li><b>12&times;</b><span>Less GPU memory</span></li>
@@ -194,11 +194,11 @@
     </article>
 
     <article class="work reveal">
-      <div>
-        <span class="work-venue">MICRO 2025</span>
-        <span class="work-when">Fall 2024</span>
+      <div class="work-thumb">
+        <img src="images/project/p-spmm-codesign.jpg" alt="Diagram of the SpMM acceleration flow: a sparse graph is transformed and tiled, then mapped onto a processing-element array and memory hierarchy." width="1400" height="870" loading="lazy" decoding="async">
       </div>
-      <div>
+      <div class="work-body">
+        <p class="work-meta"><span class="work-venue">MICRO 2025</span><span class="work-when">Fall 2024</span></p>
         <h3>Rethinking tiling and dataflow for SpMM acceleration</h3>
         <p>Reformulates sparse&ndash;dense matrix multiplication as a graph-transformation problem: decomposition for irregular patterns, non-contiguous tiling for reuse, a runtime workload-partitioning engine, custom PE micro-architecture, and a Bidirectional Fiber Tree format that supports traversal in both directions. Verified in cycle-accurate simulation with Ramulator-based HBM modelling.</p>
         <ul class="metrics">
@@ -214,11 +214,11 @@
     </article>
 
     <article class="work reveal">
-      <div>
-        <span class="work-venue">M.Sc. research</span>
-        <span class="work-when">2021 &ndash; 2022</span>
+      <div class="work-thumb">
+        <img src="images/project/p-quantization.jpg" alt="Isometric diagram of capsule-network quantisation: layer-wise vulnerability analysis feeds mixed-precision allocation and Power-of-Two scalers that map onto hardware bit shifts." width="1400" height="870" loading="lazy" decoding="async">
       </div>
-      <div>
+      <div class="work-body">
+        <p class="work-meta"><span class="work-venue">M.Sc. research</span><span class="work-when">2021 &ndash; 2022</span></p>
         <h3>Quantising capsule networks for cheap hardware</h3>
         <p>Adaptive post-training quantisation with mixed-precision allocation, guided by a layer-wise vulnerability analysis that came out of my earlier fault-injection work on single-event upsets. Power-of-Two scalers replace floating-point multiplies with bit shifts, so the arithmetic maps onto simple hardware.</p>
         <ul class="metrics">
