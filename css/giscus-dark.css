@@ -45,16 +45,64 @@ main {
   font-size: 14px;
 }
 
-main .gsc-comment-box,
-main .gsc-comment,
-main .gsc-reactions { border-radius: 9px; }
-
-/* the reaction control is the only way in to GitHub's eight reactions,
-   so make it read as a button rather than a stray glyph */
-main .gsc-reactions-count { font-size: 12px; letter-spacing: .04em; color: #8c95a5; }
-main .gsc-social-reaction-summary-item { border-radius: 999px; }
-main .gsc-reactions button { border: 1px solid #242935; border-radius: 999px; padding: 4px 10px; }
-main .gsc-reactions button:hover { border-color: rgba(240,180,41,.34); background: rgba(240,180,41,.10); }
-
+main .gsc-comment-box, main .gsc-comment { border-radius: 9px; }
 main .gsc-timeline { gap: 14px; }
 main .gsc-header { padding-bottom: 8px; }
+
+/* ---- reactions -------------------------------------------------------- */
+/* GitHub allows exactly eight reactions and giscus hides all of them behind
+   a single smiley inside a closed <details>. Force the panel open so the row
+   is visible on arrival. They stay disabled until the reader signs in, which
+   is GitHub's rule and cannot be styled away. */
+main .gsc-reactions-count {
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  color: #8c95a5;
+}
+main .gsc-reactions-menu { display: block !important; }
+main .gsc-reactions-menu::details-content { content-visibility: visible !important; }
+main .gsc-reactions-menu > summary { display: none !important; }
+main .gsc-reactions-popover {
+  display: block !important;
+  position: static !important;
+  transform: none !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  background: transparent !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+main .gsc-reactions-popover > .border-t { display: none !important; }
+main .gsc-reactions-popover > p {
+  margin: 2px 0 9px !important;
+  font-size: 11.5px !important;
+  text-align: center !important;
+  color: #8c95a5 !important;
+}
+main .gsc-reactions-popover > div {
+  margin: 0 !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 6px !important;
+}
+main .gsc-emoji-button {
+  border: 1px solid #242935 !important;
+  border-radius: 999px !important;
+  padding: 5px 10px !important;
+  background: #12151b !important;
+  line-height: 1 !important;
+  transition: border-color .18s, background .18s, transform .18s;
+}
+main .gsc-emoji-button:not([disabled]):hover {
+  border-color: rgba(240,180,41,.34) !important;
+  background: rgba(240,180,41,.10) !important;
+  transform: translateY(-1px);
+}
+main .gsc-emoji-button[disabled] { opacity: .5 !important; cursor: default !important; }
+main .gsc-emoji { font-size: 15px !important; }
+main .gsc-social-reaction-summary-item { border-radius: 999px; }
