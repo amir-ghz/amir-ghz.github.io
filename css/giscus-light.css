@@ -97,10 +97,12 @@ main .gsc-emoji-button {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+  /* no filled pill: on a dark page the fill reads as a black box behind
+     each emoji, so the border alone carries the affordance */
+  background: transparent !important;
   border: 1px solid #e0dcd2 !important;
   border-radius: 999px !important;
   padding: 5px 10px !important;
-  background: #ffffff !important;
   line-height: 1 !important;
   transition: border-color .18s, background .18s, transform .18s;
 }
