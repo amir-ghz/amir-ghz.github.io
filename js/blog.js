@@ -71,8 +71,12 @@
 
   /* --------------------------------------------------------------- giscus */
   var slot = document.getElementById('giscus-slot');
+  var THEMES = {
+    light: 'https://amir-ghz.github.io/css/giscus-light.css',
+    dark:  'https://amir-ghz.github.io/css/giscus-dark.css'
+  };
   function giscusTheme() {
-    return root.getAttribute('data-theme') === 'light' ? 'light' : 'dark_dimmed';
+    return root.getAttribute('data-theme') === 'light' ? THEMES.light : THEMES.dark;
   }
   if (slot) {
     var s = document.createElement('script');

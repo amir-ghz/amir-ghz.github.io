@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Amir Ghazizadeh — Blog</title>
+    <link>https://amir-ghz.github.io/blog/</link>
+    <atom:link href="https://amir-ghz.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Sparse acceleration, GPU kernels, and hardware-software co-design.</description>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 31 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Two lotteries, and the space between them</title>
+      <link>https://amir-ghz.github.io/blog/two-lotteries/</link>
+      <guid isPermaLink="true">https://amir-ghz.github.io/blog/two-lotteries/</guid>
+      <pubDate>Sun, 31 Aug 2026 00:00:00 +0000</pubDate>
+      <author>amir.g@ucf.edu (Amir Ghazizadeh)</author>
+      <category>Sparsity</category>
+      <category>Hardware accelerators</category>
+      <description>Machine learning made two lottery arguments seven years apart and never put them in the same room. One says most of a trained network is surplus. The other says the hardware of the day decides whether you can collect on it.</description>
+    </item>
+  </channel>
+</rss>
