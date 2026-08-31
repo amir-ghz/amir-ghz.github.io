@@ -64,6 +64,9 @@ main .gsc-reactions-menu { display: block !important; }
 main .gsc-reactions-menu::details-content { content-visibility: visible !important; }
 main .gsc-reactions-menu > summary { display: none !important; }
 main .gsc-reactions-popover {
+  /* giscus hides the panel with visibility, which inherits to every child,
+     so content-visibility alone reserves the space without painting it */
+  visibility: visible !important;
   display: block !important;
   position: static !important;
   transform: none !important;
@@ -91,6 +94,9 @@ main .gsc-reactions-popover > div {
   gap: 6px !important;
 }
 main .gsc-emoji-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   border: 1px solid #e0dcd2 !important;
   border-radius: 999px !important;
   padding: 5px 10px !important;
