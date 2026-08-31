@@ -1,0 +1,491 @@
+/* ==========================================================================
+   Blog — layered on css/site.css. Uses only the tokens defined there, so
+   swapping --accent still reskins everything.
+   ========================================================================== */
+
+/* --------------------------------------------------------------- progress */
+.progress {
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: transparent;
+  z-index: 40;
+  pointer-events: none;
+}
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transform-origin: 0 50%;
+  transition: width .08s linear;
+}
+
+/* ------------------------------------------------------------ index: head */
+.blog-head { padding: 68px 0 10px; }
+.blog-title {
+  font-family: var(--serif);
+  font-size: clamp(34px, 5.4vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -.015em;
+  color: var(--paper-hi);
+  margin: 0 0 14px;
+}
+.blog-lede {
+  max-width: 62ch;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--paper-lo);
+  margin: 0;
+}
+
+/* ----------------------------------------------------------- index: cards */
+.post-list {
+  display: grid;
+  gap: 26px;
+  padding: 44px 0 20px;
+}
+@media (min-width: 860px) { .post-list { gap: 30px; } }
+
+.post-card {
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--ink-2);
+  overflow: hidden;
+  transition: border-color .25s var(--ease), transform .25s var(--ease);
+}
+.post-card:hover { border-color: var(--accent-line); transform: translateY(-2px); }
+
+.post-card-fig {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 6;
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(120% 130% at 12% 0%, var(--accent-wash), transparent 62%),
+    var(--ink-3);
+}
+@media (max-width: 620px) { .post-card-fig { aspect-ratio: 16 / 9; } }
+.post-card-fig img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.post-card-fig.no-img img { display: none; }
+
+.post-card-body { padding: 26px 28px 28px; min-width: 0; }
+@media (max-width: 620px) { .post-card-body { padding: 22px 20px 24px; } }
+.post-card h2 {
+  font-family: var(--serif);
+  font-size: clamp(23px, 2.8vw, 29px);
+  line-height: 1.2;
+  letter-spacing: -.012em;
+  margin: 10px 0 12px;
+}
+.post-card h2 a { color: var(--paper-hi); text-decoration: none; }
+.post-card h2 a:hover { color: var(--accent); }
+.post-card p {
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--paper-lo);
+  margin: 0;
+  max-width: 68ch;
+}
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: .06em;
+  color: var(--paper-lo);
+}
+.post-meta .dotsep { opacity: .45; }
+.post-meta svg { width: 13px; height: 13px; vertical-align: -2px; margin-right: 5px; }
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+.tag {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--paper-lo);
+  background: var(--ink-3);
+}
+.tag.is-accent { color: var(--accent); border-color: var(--accent-line); background: var(--accent-wash); }
+
+.readmore {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+}
+.readmore svg { width: 15px; height: 15px; transition: transform .22s var(--ease); }
+.readmore:hover svg { transform: translateX(3px); }
+
+/* -------------------------------------------------------------- post: top */
+.post-shell { padding: 40px 0 0; }
+
+.crumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: var(--paper-lo);
+  text-decoration: none;
+  margin-bottom: 26px;
+}
+.crumb svg { width: 14px; height: 14px; transition: transform .22s var(--ease); }
+.crumb:hover { color: var(--accent); }
+.crumb:hover svg { transform: translateX(-3px); }
+
+.post-title {
+  font-family: var(--serif);
+  font-size: clamp(32px, 5.6vw, 54px);
+  line-height: 1.06;
+  letter-spacing: -.018em;
+  color: var(--paper-hi);
+  margin: 0 0 18px;
+  max-width: 19ch;
+}
+.post-standfirst {
+  font-family: var(--serif);
+  font-size: clamp(17px, 2.1vw, 20px);
+  line-height: 1.6;
+  color: var(--paper-lo);
+  max-width: 60ch;
+  margin: 0 0 26px;
+}
+.post-byline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+}
+.post-byline img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+.post-byline .who { font-size: 14px; color: var(--paper); }
+.post-byline .who a { color: var(--paper-hi); text-decoration: none; font-weight: 500; }
+.post-byline .who a:hover { color: var(--accent); }
+
+/* ------------------------------------------------------------- post: hero */
+.post-hero {
+  position: relative;
+  margin: 30px 0 8px;
+  border-radius: 11px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  aspect-ratio: 21 / 9;
+  background:
+    radial-gradient(90% 120% at 12% 0%, var(--accent-wash), transparent 62%),
+    var(--ink-2);
+}
+@media (max-width: 700px) { .post-hero { aspect-ratio: 16 / 10; } }
+.post-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.post-hero.no-img img { display: none; }
+.post-hero.no-img::after {
+  content: "hero image slot — drop images/blog/two-lotteries-1600.jpg";
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: var(--paper-lo);
+  background: linear-gradient(transparent, rgba(0,0,0,.28));
+}
+.post-figcaption {
+  font-size: 12.5px;
+  color: var(--paper-lo);
+  margin: 10px 2px 0;
+  font-style: italic;
+}
+
+/* ---------------------------------------------------------- post: layout */
+.post-layout { padding: 34px 0 10px; }
+@media (min-width: 1080px) {
+  .post-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 224px;
+    gap: 58px;
+    align-items: start;
+  }
+}
+
+.post-toc { display: none; }
+@media (min-width: 1080px) {
+  .post-toc {
+    display: block;
+    position: sticky;
+    top: calc(var(--nav-h) + 28px);
+    padding-left: 22px;
+    border-left: 1px solid var(--line-soft);
+  }
+}
+.post-toc h3 {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--paper-lo);
+  margin: 0 0 12px;
+}
+.post-toc a {
+  display: block;
+  padding: 6px 0;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--paper-lo);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  margin-left: -24px;
+  padding-left: 22px;
+  transition: color .2s var(--ease), border-color .2s var(--ease);
+}
+.post-toc a:hover { color: var(--paper-hi); }
+.post-toc a.is-active { color: var(--accent); border-left-color: var(--accent); }
+
+/* ----------------------------------------------------------- post: prose */
+.prose { max-width: 68ch; font-family: var(--serif); }
+.prose > p {
+  font-size: 18.5px;
+  line-height: 1.78;
+  color: var(--paper);
+  margin: 0 0 25px;
+}
+.prose > p:first-of-type::first-letter {
+  float: left;
+  font-size: 62px;
+  line-height: .84;
+  padding: 6px 11px 0 0;
+  color: var(--accent);
+  font-weight: 500;
+}
+.prose h2 {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3.2vw, 31px);
+  line-height: 1.2;
+  letter-spacing: -.012em;
+  color: var(--paper-hi);
+  margin: 48px 0 16px;
+  scroll-margin-top: calc(var(--nav-h) + 26px);
+}
+.prose h3 {
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -.005em;
+  color: var(--paper-hi);
+  margin: 34px 0 12px;
+  scroll-margin-top: calc(var(--nav-h) + 26px);
+}
+.prose a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-line); }
+.prose a:hover { border-bottom-color: var(--accent); }
+.prose strong { color: var(--paper-hi); font-weight: 600; }
+.prose em { font-style: italic; }
+.prose code {
+  font-family: var(--mono);
+  font-size: .84em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--ink-3);
+  border: 1px solid var(--line-soft);
+  color: var(--paper-hi);
+}
+.prose ul, .prose ol { margin: 0 0 25px; padding-left: 24px; }
+.prose li {
+  font-size: 18.5px;
+  line-height: 1.72;
+  color: var(--paper);
+  margin-bottom: 10px;
+}
+.prose li::marker { color: var(--accent); }
+.prose hr { border: 0; border-top: 1px solid var(--line-soft); margin: 44px 0; }
+
+/* a quotation from a cited paper, not a decorative pull quote */
+.quote {
+  margin: 30px 0;
+  padding: 20px 24px;
+  border-left: 2px solid var(--accent);
+  background: var(--accent-wash);
+  border-radius: 0 7px 7px 0;
+}
+.quote p {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--paper-hi);
+  margin: 0;
+  font-style: italic;
+}
+.quote cite {
+  display: block;
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-style: normal;
+  letter-spacing: .06em;
+  color: var(--paper-lo);
+}
+.quote cite a { color: var(--paper-lo); border-bottom-color: var(--line); }
+.quote cite a:hover { color: var(--accent); }
+
+/* the one editorial aside per section */
+.aside-note {
+  margin: 30px 0;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--ink-2);
+}
+.aside-note p { font-family: var(--sans); font-size: 15px; line-height: 1.66; color: var(--paper-lo); margin: 0; }
+.aside-note .aside-label {
+  display: flex; align-items: center; gap: 7px;
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 9px;
+}
+.aside-note .aside-label svg { width: 14px; height: 14px; }
+
+/* --------------------------------------------------------- post: footers */
+.post-end {
+  max-width: 68ch;
+  margin-top: 52px;
+  padding-top: 30px;
+  border-top: 1px solid var(--line-soft);
+}
+.post-cta {
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+  padding: 22px; border: 1px solid var(--accent-line); border-radius: 9px;
+  background: var(--accent-wash); margin-bottom: 34px;
+}
+.post-cta p { font-family: var(--sans); font-size: 15px; line-height: 1.6; color: var(--paper); margin: 0; flex: 1 1 260px; }
+
+.share-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 40px; }
+.share-row span {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--paper-lo); margin-right: 4px;
+}
+.share-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 7px;
+  border: 1px solid var(--line); color: var(--paper-lo);
+  background: transparent; cursor: pointer;
+  transition: all .2s var(--ease);
+}
+.share-btn svg { width: 16px; height: 16px; }
+.share-btn:hover { color: var(--accent); border-color: var(--accent-line); background: var(--accent-wash); }
+
+/* ------------------------------------------------------------- giscus */
+.comments { max-width: 68ch; margin-top: 12px; padding-top: 30px; border-top: 1px solid var(--line-soft); }
+.comments-head {
+  display: flex; align-items: center; gap: 9px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--paper-lo); margin-bottom: 6px;
+}
+.comments-head svg { width: 15px; height: 15px; color: var(--accent); }
+.comments-note {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  line-height: 1.62;
+  color: var(--paper-lo);
+  margin: 0 0 20px;
+  max-width: 58ch;
+  text-align: left;
+}
+.giscus, .giscus-frame { width: 100%; }
+.giscus-frame { border: none; color-scheme: normal; }
+
+/* ------------------------------------------------- generative hero art
+   Shown until a real hero image is dropped into images/blog/. Inline SVG
+   so it inherits the theme tokens and stays crisp at any size. */
+.hero-art { display: none; width: 100%; height: 100%; }
+.post-hero.no-img .hero-art,
+.post-card-fig.no-img .hero-art { display: block; }
+.post-hero.no-img::after { content: none; }
+
+.hero-art .off  { fill: none; stroke: var(--line-soft); stroke-width: 1; }
+.hero-art .on   { fill: var(--accent); }
+.hero-art .flow { fill: none; stroke: var(--accent-line); stroke-width: 1.5; }
+.hero-art .pe   { fill: var(--ink-3); stroke: var(--line); stroke-width: 1; }
+.hero-art .pe.hot { fill: var(--accent-wash); stroke: var(--accent-line); }
+.hero-art .frame { fill: none; stroke: var(--line); stroke-width: 1; stroke-dasharray: 4 5; }
+.hero-art .lbl {
+  font-family: var(--mono); font-size: 19px; letter-spacing: .14em;
+  text-transform: uppercase; fill: var(--paper-lo); opacity: .7;
+}
+
+
+/* --------------------------------------------------- repository card
+   Used at the top of a post and again at the end. Reads like a repo,
+   because that is what it is. */
+.repo-card {
+  display: block;
+  margin: 32px 0;
+  padding: 20px 22px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--ink-2);
+  text-decoration: none;
+  transition: border-color .22s var(--ease), background .22s var(--ease);
+}
+.repo-card:hover { border-color: var(--accent-line); background: var(--accent-wash); }
+
+.repo-card-top { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+.repo-card-top .gh { width: 18px; height: 18px; color: var(--paper-lo); flex: none; }
+.repo-path { font-family: var(--mono); font-size: 14.5px; letter-spacing: -.01em; min-width: 0; }
+.repo-path .owner { color: var(--paper-lo); }
+.repo-path .name  { color: var(--accent); font-weight: 500; }
+.repo-pill {
+  margin-left: auto;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .13em;
+  text-transform: uppercase; padding: 3px 8px; border-radius: 999px;
+  border: 1px solid var(--accent-line); color: var(--accent); background: var(--accent-wash);
+}
+
+.repo-desc {
+  font-family: var(--sans) !important;
+  font-size: 14.5px !important;
+  line-height: 1.62 !important;
+  color: var(--paper) !important;
+  margin: 11px 0 0 !important;
+  max-width: 62ch;
+}
+.repo-stats {
+  display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center;
+  margin-top: 15px; padding-top: 14px; border-top: 1px solid var(--line-soft);
+  font-family: var(--mono); font-size: 11.5px; letter-spacing: .05em; color: var(--paper-lo);
+}
+.repo-stats i { font-style: normal; display: inline-flex; align-items: center; gap: 6px; }
+.repo-stats svg { width: 13px; height: 13px; color: var(--accent); }
+.repo-stats .go { margin-left: auto; color: var(--accent); display: inline-flex; align-items: center; gap: 6px; }
+.repo-stats .go svg { color: inherit; transition: transform .22s var(--ease); }
+.repo-card:hover .go svg { transform: translateX(3px); }
+@media (max-width: 560px) { .repo-stats .go { margin-left: 0; } }
+
+/* ------------------------------------------------------ justified setting
+   Justification without hyphenation produces rivers, so the two ship
+   together. Below 600px the measure is too short for either to look good,
+   so the column goes back to ragged-right. */
+.prose > p,
+.prose li {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  text-wrap: pretty;
+}
+.prose > p { orphans: 2; widows: 2; }
+.post-standfirst { text-wrap: pretty; }
+@media (max-width: 600px) {
+  .prose > p,
+  .prose li { text-align: left; hyphens: manual; }
+}

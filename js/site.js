@@ -34,8 +34,15 @@
   /* ------------------------------------ sticky nav hairline + active */
   var nav = document.getElementById('nav');
   var navAnchors = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+  // blog pages link back with "/#section", which is not a valid selector,
+  // so only in-page hash links take part in the scrollspy
   var sections = navAnchors
-    .map(function (a) { return document.querySelector(a.getAttribute('href')); })
+    .map(function (a) {
+      var href = a.getAttribute('href') || '';
+      return href.charAt(0) === '#' && href.length > 1
+        ? document.querySelector(href)
+        : null;
+    })
     .filter(Boolean);
 
   var ticking = false;
