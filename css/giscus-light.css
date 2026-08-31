@@ -114,3 +114,52 @@ main .gsc-emoji-button:not([disabled]):hover {
 main .gsc-emoji-button[disabled] { opacity: .5 !important; cursor: default !important; }
 main .gsc-emoji { font-size: 15px !important; }
 main .gsc-social-reaction-summary-item { border-radius: 999px; }
+
+
+/* ---- signed-in states ---------------------------------------------------
+   Once a reader authenticates, giscus drops the no-token/disabled classes and
+   the controls pick up Primer's filled button styling, which resolves to a
+   dark fill on the dark theme and reads as a black box behind each emoji.
+   Nothing in this row should ever paint its own background, in either theme,
+   in any state. The border ring is the only affordance. */
+main .gsc-reactions,
+main .gsc-reactions > div,
+main .gsc-reactions-menu,
+main .gsc-reactions-menu > div,
+main .gsc-reactions-popover,
+main .gsc-reactions-popover.open,
+main .gsc-reactions-popover > div,
+main .gsc-reactions-button,
+main .gsc-reactions-button.popover-only,
+main .gsc-emoji-button,
+main .gsc-emoji-button:enabled,
+main .gsc-direct-reaction-buttons,
+main .gsc-direct-reaction-button,
+main .gsc-social-reaction-summary-item {
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* the popover arrow is drawn as two borders in the overlay colour; with the
+   panel inlined there is nothing for it to point at */
+main .gsc-reactions-popover::before,
+main .gsc-reactions-popover::after,
+main .gsc-reactions-popover.open::before,
+main .gsc-reactions-popover.open::after { display: none !important; content: none !important; }
+
+/* hover and reacted states, in the accent rather than Primer's grey/blue */
+main .gsc-emoji-button:enabled:hover,
+main .gsc-social-reaction-summary-item:hover:enabled {
+  background-color: rgba(168,112,12,.09) !important;
+  border-color: rgba(168,112,12,.32) !important;
+}
+main .gsc-emoji-button.has-reacted,
+main .gsc-social-reaction-summary-item.has-reacted,
+main .gsc-social-reaction-summary-item.has-reacted:hover:enabled {
+  background-color: rgba(168,112,12,.09) !important;
+  border-color: #a8700c !important;
+  color: #a8700c !important;
+}
+main .gsc-emoji-button:enabled { cursor: pointer !important; opacity: 1 !important; }
+main .gsc-emoji-button { border: 1px solid #e0dcd2 !important; }
