@@ -111,9 +111,9 @@
 
     <h1 class="post-title">Two lotteries, and the space between them</h1>
 
-    <p class="post-standfirst">Machine learning made two lottery arguments seven years apart and never put
-    them in the same room. One says most of a trained network is surplus. The other says the hardware
-    of the day decides whether you can collect on it.</p>
+    <p class="post-standfirst">You can prune more than half of the parameters inside a trained
+    neural network and it still works. So why does it not get proportionally faster? The answer turns
+    out to be a story about hardware, not about algorithms.</p>
 
     <div class="post-byline">
       <img src="../../images/amir-avatar.jpg" alt="" width="512" height="512" decoding="async">
@@ -122,7 +122,7 @@
         <div class="post-meta" style="margin-top:3px">
           <span>31 Aug 2026</span>
           <span class="dotsep">·</span>
-          <span>7 min read</span>
+          <span>10 min read</span>
         </div>
       </div>
     </div>
@@ -494,16 +494,19 @@
     <div class="post-layout">
       <div class="prose">
 
-        <p>For the past few years I have worked on sparse accelerators, which means my day is spent
-        between two literatures that rarely read each other. One of them removes weights from neural
-        networks and reports how many it removed. The other builds the machines that have to run
-        whatever is left, and reports how long that takes. Both are catalogued well on their own.
-        There are good reading lists for sparse attention, mixture-of-experts routing, KV-cache
-        selection, quantization and pruning, and equally good ones for accelerator microarchitecture,
-        GPU and NPU design, dataflow taxonomies and tensor compilers. What nobody had catalogued was
-        the ground between them, which is unfortunate, because that is where sparsity is actually won
-        or lost. I spent this summer assembling that catalogue, and what follows is the argument that
-        shaped it.</p>
+        <p>You can prune more than half of the parameters inside a trained neural network and it
+        will still recognise a face, still answer a question, still steer a car. On many models you
+        can go well past half. Some version of this has been known since 1989.</p>
+
+        <p>That ought to be the end of the story. Fewer numbers means less arithmetic, less
+        arithmetic means less time, and the model should come out proportionally faster. It does
+        not. Very often it does not come out faster at all.</p>
+
+        <p>The distance between those two paragraphs is where I have spent my PhD. I design the
+        hardware that is supposed to collect the saving, and the thing nobody tells you going in is
+        that creating the saving and collecting it are separate problems, solved by different
+        people, measured in different units. This summer I put everything the field knows about
+        that distance into one catalogue, and what follows is the argument that shaped it.</p>
 
         <a class="repo-card" href="https://github.com/amir-ghz/awesome-sparse-acceleration" target="_blank" rel="noopener">
           <div class="repo-card-top">
@@ -521,65 +524,103 @@
           </div>
         </a>
 
-        <h2 id="two-units">Two papers, two units</h2>
+        <h2 id="why-not-faster">Why skipping the work does not make it faster</h2>
 
-        <p>The mismatch survives good faith on both sides. A model-efficiency paper reports the
-        fraction of a tensor it removed; an architecture paper reports wall-clock time on real
-        silicon. Those are different quantities, and for most of the past decade they were close to
-        uncorrelated, because the cost of finding a zero can exceed the cost of multiplying by it.
-        The reasons are unglamorous and they compound. Index metadata competes with the values it
-        describes, so a compressed format can end up larger than the thing it compressed. Gather and
-        scatter destroy the reuse that dense tiling depends on, so the memory system stops
-        cooperating. And a dense multiply-accumulate array has no mechanism for skipping a zero, so
-        it does not skip it: feed a systolic array a tensor that is almost entirely zeros and it will
-        multiply by every one of them, at full speed and full power.</p>
+        <p>The field uses two verbs for this, and the distinction between them is the whole
+        problem. Algorithm researchers <strong>prune</strong>: they decide which numbers do not
+        matter and set them to zero. Hardware researchers <strong>skip</strong>: they try to make
+        the chip step over those zeros instead of multiplying by them. Pruning is easy and it is
+        done. Skipping is the hard part, and nothing about pruning guarantees it.</p>
 
-        <p>Sparsity ratio is a property of a tensor. Time is a property of a machine. The function
-        between those two is the thing worth studying, and it is built out of formats, dataflows,
-        intersection units, load balancing and sparsity predictors, material that sits scattered
-        across ISCA, MICRO, HPCA, ASPLOS, NeurIPS, ICLR, MLSys and arXiv with no organising principle
-        beyond the date of publication.</p>
+        <p>So when an algorithm paper reports how much of a model it pruned away and an
+        architecture paper reports that the same model got twenty percent faster, neither is
+        exaggerating. They are reporting different quantities. Three things stand between the
+        two, and they compound.</p>
 
-        <h2 id="terms">Establishing terms</h2>
+        <p><strong>You have to record where the zeros are.</strong> A dense matrix needs no
+        explanation: the hardware knows the third number in the fourth row sits at a fixed offset.
+        The moment you prune numbers out of it, that arithmetic breaks, so you have to store a map of which
+        survivors sit where. That map is data too, and it has to be stored and read alongside the values
+        it describes. At moderate sparsity it costs more bytes than the pruning saved, so the
+        compressed form is larger than what it replaced.</p>
 
-        <p>Part of the confusion is that "sparsity" names a dozen different things, and most
-        arguments in this area turn out to be arguments about which one is meant. Weight sparsity,
-        the kind pruning produces, is the oldest and by some distance the least deployed. The forms
-        carrying real production traffic today are newer and stranger. Attention maps go
-        overwhelmingly zero at long context. KV caches hold far more past tokens than any given query
-        attends to. Mixture-of-experts routing touches only a small share of the parameters per
-        token, which has quietly made coarse dynamic sparsity the default architecture of frontier
-        models rather than an efficiency trick applied afterwards. Graph networks inherit adjacency
-        structure that is sparse by nature and irregular by distribution, and recommender embeddings
-        are almost entirely untouched on any given lookup.</p>
+        <p><strong>The survivors are scattered.</strong> Processors are fast because they guess
+        what you will need next, and dense data makes them right almost every time: the next
+        number is the one sitting beside this one. Scatter the survivors and every guess misses.
+        The chip spends its time waiting on memory rather than computing, and the arithmetic units
+        you paid for sit idle.</p>
 
-        <p>What separates these forms is not how many zeros they contain but two other things: where
-        the zeros sit, and when you find out about them. Static weight sparsity is known before the
-        kernel launches, so its cost is paid offline and the hardware can be told in advance.
-        Attention and expert sparsity are discovered at runtime, which means somebody has to predict
-        them cheaply enough to still come out ahead. Every dynamic-sparsity accelerator I know of
-        lives or dies on that predictor, and whatever the predictor costs comes straight out of the
-        saving it was built to capture.</p>
+        <p><strong>The multiplier does not care.</strong> This is the one that surprises people.
+        The array of multipliers inside a GPU runs at a fixed rate. Give it a zero and it
+        multiplies by zero, on schedule, drawing the same power as any other number. It has no mechanism for noticing that the work was pointless, so it does not
+        finish early. Skipping is not something a processor does for free when the data happens to
+        be zero. It is a capability that has to be designed in, and for most of the last decade it
+        was not.</p>
+
+        <p>Put those together and the shape of the problem is clear. How sparse a model is, is a
+        property of the model. How long it takes, is a property of the machine. The function
+        connecting the two is the thing worth studying, and it is built from formats, dataflows,
+        intersection units, load balancing and sparsity predictors. That work is scattered across
+        ISCA, MICRO, HPCA, ASPLOS, NeurIPS, ICLR, MLSys and arXiv with no organising principle
+        beyond the date of publication, which is the hole the catalogue was meant to fill.</p>
+
+        <h2 id="kinds-of-zeros">Not all zeros are the same</h2>
+
+        <p>The field's word for all of this is <em>sparsity</em>. A tensor is sparse when most
+        of its values are zero, wherever those zeros happen to come from, and that last clause is
+        doing more work than it looks. Sparsity is one word for about a dozen different situations,
+        and most arguments in this area turn out to be arguments about which one is meant. They
+        behave nothing alike.</p>
+
+        <p>The oldest kind is <strong>weight sparsity</strong>: you prune the trained parameters
+        and most of them become zero. It is the most studied and, ironically, the least used in
+        production. The kinds that actually carry traffic today are newer. In
+        <strong>attention</strong>, the mechanism that lets a language model relate every word to
+        every other word, the vast majority of those relationships turn out to matter not at all,
+        and at long context almost the whole table is zero. The <strong>KV cache</strong>, the
+        model's running memory of the conversation so far, holds far more of the past than any
+        single new word actually consults. A <strong>mixture-of-experts</strong> model contains
+        many specialist sub-networks and wakes only a couple per word, so most of the parameters
+        sit idle on any given step. <strong>Graph networks</strong> inherit their sparsity from
+        the data: a social network is almost entirely non-friendships. And a recommender system
+        holds an enormous table of embeddings and touches a handful of rows per query.</p>
+
+        <p>What separates these is not how many zeros there are. It is two other questions.
+        <strong>Where are the zeros</strong>, and <strong>when do you find out?</strong> Pruned
+        weights are known before the program runs, so the bookkeeping can be done once, offline,
+        and the hardware can be told in advance. Attention and expert sparsity are different: the
+        zeros depend on the input, so nobody knows where they are until the model is halfway
+        through the calculation. Something has to predict them, and the prediction costs time.
+        Every dynamic-sparsity accelerator I know of lives or dies on that trade, because whatever
+        the predictor costs comes straight out of the saving it exists to capture.</p>
 
         <h2 id="lotteries">Two lotteries</h2>
 
-        <p>The clearest way I know to explain the gap is that machine learning produced two lottery
-        arguments seven years apart and never put them in the same room. The first is Frankle and
-        Carbin's lottery ticket hypothesis. Read narrowly it is a claim about initialization; read
-        broadly it is the sharpest version of the observation this entire area rests on, which is
-        that most of a trained network is surplus and the sparse network was already sitting inside
-        the dense one.</p>
+        <p>That is the mechanics of it. The harder question is why the situation lasted as long
+        as it did, and the best answer I know comes from two arguments about lotteries, made seven
+        years apart and never put in the same room. The first says the sparse network was there all
+        along. The second says the hardware of the day decides whether that does you any good.</p>
+
+        <p>The first is Frankle and Carbin's lottery ticket hypothesis. They found that hidden
+        inside a big randomly initialised network there is a much smaller one that, trained by
+        itself from the same starting point, does just as well.</p>
 
         <blockquote class="quote">
           <p>"dense, randomly-initialized, feed-forward networks contain subnetworks ('winning
-          tickets') that when trained in isolation reach test accuracy comparable to the original
-          network in a similar number of iterations."</p>
+          tickets') that &mdash; when trained in isolation &mdash; reach test accuracy comparable to
+          the original network in a similar number of iterations."</p>
           <cite>Frankle &amp; Carbin, <a href="https://arxiv.org/abs/1803.03635" target="_blank" rel="noopener">The Lottery Ticket Hypothesis</a>, ICLR 2019</cite>
         </blockquote>
 
-        <p>On that reading sparsity is not a compromise accepted in exchange for accuracy. It is a
-        description of what the network was all along. Which makes the second argument, Sara Hooker's
-        hardware lottery, land all the harder, because it explains why none of that helped.</p>
+        <p>Read narrowly it is a claim about lucky starting values. Read broadly it is the
+        sharpest statement anyone has made of the thing this whole field rests on: most of a
+        trained network is surplus, and the small network was sitting inside the large one the
+        entire time. On that reading sparsity is not a compromise you accept in exchange for
+        accuracy. It is a description of what the network always was.</p>
+
+        <p>Which makes the second argument, Sara Hooker's hardware lottery, land harder, because
+        it explains why none of that helped. Hooker's point is that ideas do not win on merit
+        alone. They win when the machines of the day happen to suit them.</p>
 
         <blockquote class="quote">
           <p>"…when a research idea wins because it is suited to the available software and hardware
@@ -588,50 +629,56 @@
           <cite>Sara Hooker, <a href="https://arxiv.org/abs/2009.06489" target="_blank" rel="noopener">The Hardware Lottery</a>, CACM 2021</cite>
         </blockquote>
 
-        <p>Her warning was aimed squarely at fields in this position: "these lessons are particularly
-        salient given the advent of domain specialized hardware which make it increasingly costly to
-        stray off of the beaten path of research ideas." Set the two arguments side by side and the
-        lost decade makes sense. Fine-grained unstructured sparsity won the initialization lottery
-        and then lost the hardware lottery, and the winning ticket turned out to be both real and
-        worthless, because no shipping datapath could collect on it. GPUs became very good at dense
-        matrix multiplication, dense matrix multiplication became very cheap, and a sparse layer ran
-        at the speed of a dense one because that is what a machine does with zeros it cannot see.
-        None of that was a failure of the algorithms. It was Hooker's mechanism working exactly as
-        she described.</p>
+        <p>Set the two side by side and the lost decade explains itself. Fine-grained sparsity won
+        the first lottery and lost the second. The winning ticket was real and it was worthless,
+        because no chip you could actually buy knew how to cash it. GPUs had spent years getting
+        very good at dense matrix multiplication, dense matrix multiplication had become very
+        cheap, and a sparse layer ran at the speed of a dense one because that is what a machine
+        does with zeros it cannot see. That was never a failure of the pruning research. It was
+        Hooker's mechanism working exactly as she described it.</p>
 
         <h2 id="rigging">Rigging the draw</h2>
 
         <p>What changed is that people stopped waiting to win the hardware lottery and started
-        rigging the draw, and N:M sparsity is the cleanest case of it. Two-of-every-four is not a
-        natural property of trained networks and nobody discovered it in the weight distributions. It
-        exists because a fixed-width multiplexer in front of a multiply-accumulate array can decode
-        it at line rate, which makes it the rare sparsity pattern a dense-throughput machine can
-        actually exploit. NVIDIA built the Sparse Tensor Core around that constraint, and the
-        algorithm side was then asked to hit the pattern; the papers on training into 2:4 followed
-        the silicon rather than the other way round.</p>
+        rigging the draw.</p>
 
-        <p>That inverts the usual order of things, and it worked, which is why the same inversion now
-        runs through the field. DeepSeek's native sparse attention is the identical move at a
-        different granularity, an <em>"arithmetic intensity-balanced algorithm design"</em> in their
-        own words, with the sparsity trained in from the start rather than applied to a finished
-        model. Both are hardware decisions wearing algorithm clothing, and together they have shifted
-        the research question from what the best mask is to which patterns a model can be trained to
-        accept without losing anything. Those are not the same question, and the second one is set by
-        whoever designs the datapath.</p>
+        <p>The clearest case is a pattern called 2:4. The rule is blunt: in every group of four
+        adjacent weights, exactly two must be zero. Nobody discovered that rule in the data. No
+        trained network naturally organises itself that way. It exists because a small fixed
+        circuit sitting in front of a multiplier can decode "two of these four" instantly, every
+        cycle, without stalling anything, which makes it the rare sparsity pattern a
+        dense-throughput machine can genuinely exploit. NVIDIA built the constraint into the
+        Sparse Tensor Core, and the research community was then asked to train models that satisfy
+        it. The papers on hitting 2:4 without losing accuracy came <em>after</em> the silicon, not
+        before it.</p>
+
+        <p>That reverses the usual order of things, and it worked, which is why the same reversal
+        now runs through the field. DeepSeek's native sparse attention is the same move at a
+        larger scale: the sparsity pattern was chosen for what the hardware can stream efficiently,
+        described in their own paper as an <em>"arithmetic intensity-balanced algorithm design"</em>,
+        and the model was trained to want it from the start rather than having it imposed after the
+        fact. Both are hardware decisions wearing algorithm clothing, and together they have
+        quietly changed the research question from "what is the best set of weights to delete?" to
+        "which patterns can a model be taught to accept?" Those are not the same question, and the
+        second one is set by whoever designs the chip.</p>
 
         <h2 id="why-now">Why sparsity came back</h2>
 
-        <p>The timing of all this is not an accident. Sparsity returned to prominence because scaling
-        made it load-bearing. Inference moved from compute-bound to memory-bound, so the bytes moved
-        per token became the thing you actually pay for, and moving fewer bytes happens to be the one
-        saving sparsity was always reliably good at. Context windows then grew until the quadratic
-        term dominated everything else, KV caches outgrew the weights they serve, and
-        mixture-of-experts stopped being an efficiency trick and became the default shape of a
-        frontier model.</p>
+        <p>The timing is not an accident. Sparsity returned because scaling made it load-bearing.</p>
 
-        <p>Every one of those is a sparsity problem that the hardware lottery now rewards instead of
-        punishing, and that is the real change. The algorithms did not suddenly improve. What was
-        scarce moved, and sparsity happened to be holding the right ticket for the new scarcity.</p>
+        <p>For years the bottleneck in running a model was arithmetic, and sparsity's pitch was
+        that it removed arithmetic, which as we have seen it does not reliably do. Then the
+        bottleneck moved. Generating text one word at a time is limited not by multiplication but
+        by how many bytes you must haul from memory for each word produced, and moving fewer bytes
+        is the one saving sparsity was always genuinely good at. Meanwhile context windows grew
+        until attention's cost, which rises with the square of the length, dominated everything
+        else. KV caches grew larger than the models they serve. Mixture-of-experts stopped being a
+        clever trick and became the default shape of a frontier model.</p>
+
+        <p>Every one of those is a sparsity problem, and the hardware lottery now rewards them
+        instead of punishing them. That is the real change. The algorithms did not suddenly get
+        better. What was scarce moved, and sparsity happened to hold the right ticket for the new
+        scarcity.</p>
 
         <h2 id="where-this-goes">Where I think this goes</h2>
 
@@ -707,8 +754,8 @@
 
       <aside class="post-toc" aria-label="On this page">
         <h3>On this page</h3>
-        <a href="#two-units">Two papers, two units</a>
-        <a href="#terms">Establishing terms</a>
+        <a href="#why-not-faster">Why skipping does not help</a>
+        <a href="#kinds-of-zeros">Not all zeros are the same</a>
         <a href="#lotteries">Two lotteries</a>
         <a href="#rigging">Rigging the draw</a>
         <a href="#why-now">Why sparsity came back</a>
