@@ -311,6 +311,17 @@
 .prose li::marker { color: var(--accent); }
 .prose hr { border: 0; border-top: 1px solid var(--line-soft); margin: 44px 0; }
 
+/* trailing reference link at the end of a paragraph */
+.prose .ref {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: .02em;
+  color: var(--paper-lo);
+  border-bottom-color: var(--line);
+  white-space: nowrap;
+}
+.prose .ref:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
 /* a quotation from a cited paper, not a decorative pull quote */
 .quote {
   margin: 30px 0;
