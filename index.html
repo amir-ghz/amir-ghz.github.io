@@ -187,6 +187,26 @@
 
     <article class="work reveal">
       <div class="work-thumb">
+        <img src="images/project/p-castor.jpg" alt="Diagram of one CASTOR propagation step: a node&rsquo;s current state and its smoothing residual feed a small router, which emits per-node mixing weights over low-pass smoothing, high-pass contrast, and identity; a momentum term carries the previous change into the next step." width="1400" height="870" loading="lazy" decoding="async">
+      </div>
+      <div class="work-body">
+        <p class="work-meta"><span class="work-venue">NeurIPS 2026</span><span class="work-when">Spring 2026</span></p>
+        <h3>CASTOR &mdash; a graph filter that tunes itself</h3>
+        <p>Most GNNs apply one fixed polynomial filter to every node in every layer. CASTOR makes the choice at each propagation step instead: a small router reads a node&rsquo;s current state alongside its initial one and mixes low-pass smoothing, high-pass contrast, and identity per node, while a learnable per-step momentum coefficient accelerates the iteration where it stalls and damps it where it runs away. One instance covers the whole homophily spectrum with no per-dataset changes.</p>
+        <ul class="metrics">
+          <li><b>2.07</b><span>Average rank</span></li>
+          <li><b>14</b><span>Benchmark datasets</span></li>
+          <li><b>Top-3</b><span>On every dataset</span></li>
+        </ul>
+        <div class="work-links">
+          <a href="PDFs/CASTOR.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>Paper</a>
+          <a href="https://github.com/amir-ghz/CASTOR" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>Code</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="work reveal">
+      <div class="work-thumb">
         <img src="images/project/p-gnn-heterophilic.jpg" alt="Diagram of the GAMMA pipeline: an input graph feeds a gated multi-hop stage that maximises relevant signal, producing a compact graph representation." width="1400" height="870" loading="lazy" decoding="async">
       </div>
       <div class="work-body">
@@ -264,6 +284,18 @@
     </div>
 
     <div class="pubs reveal">
+
+      <div class="pub">
+        <span class="pub-venue">NeurIPS 2026</span>
+        <div>
+          <h3 class="pub-title">Self-Tuning Graph Filters via State-Dependent Operator Composition</h3>
+          <p class="pub-authors"><span class="self">A. Ghazizadeh</span>, M. Alinejad, G. K. Atia, R. Ewetz, H. Zheng</p>
+          <div class="pub-links">
+            <a href="PDFs/CASTOR.pdf" target="_blank" rel="noopener">PDF</a>
+            <a href="https://github.com/amir-ghz/CASTOR" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+      </div>
 
       <div class="pub">
         <span class="pub-venue">MICRO 2026</span>
